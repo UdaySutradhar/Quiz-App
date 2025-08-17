@@ -34,7 +34,7 @@ function selectAnswer(button, correctAnswer) {
     feedbackEl.textContent = "✅ Correct!";
     score++;
   } else {
-    feedbackEl.textContent = "❌ Wrong! Correct answer: " + correctAnswer;
+    feedbackEl.textContent = `❌ Wrong! Correct answer: ${correctAnswer}`;
   }
 }
 
@@ -43,27 +43,23 @@ nextBtn.addEventListener("click", () => {
   if (currentQuestionIndex < quizQuestions.length) {
     loadQuestion();
   } else {
-    showFinalScore();
+    quizEl.innerHTML = `<h2>🎉 Quiz Finished!</h2><p>Your Score: ${score} / ${quizQuestions.length}</p>`;
+    feedbackEl.textContent = "Congratulations!";
+    nextBtn.classList.add("hidden");
+    retryBtn.classList.remove("hidden");
   }
 });
-
-function showFinalScore() {
-  quizEl.innerHTML = `<h2>🎉 Congratulations! You finished the quiz.</h2>
-                      <p>Your final score is: ${score} / ${quizQuestions.length}</p>`;
-  feedbackEl.textContent = "";
-  nextBtn.style.display = "none";
-  retryBtn.classList.remove("hidden");
-}
 
 retryBtn.addEventListener("click", () => {
   score = 0;
   currentQuestionIndex = 0;
-  nextBtn.style.display = "inline-block";
-  retryBtn.classList.add("hidden");
   pickRandomQuestions();
   loadQuestion();
+  retryBtn.classList.add("hidden");
+  nextBtn.classList.remove("hidden");
+  feedbackEl.textContent = "";
 });
 
-// Initialize quiz
+// Initialize
 pickRandomQuestions();
 loadQuestion();
