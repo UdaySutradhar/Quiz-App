@@ -31,6 +31,10 @@ button:hover {
   background: #0056b3;
 }
 
+.hidden {
+  display: none;
+}
+
 .option {
   display: block;
   margin: 10px 0;
